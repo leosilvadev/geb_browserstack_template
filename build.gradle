@@ -1,82 +1,95 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+import org.apache.commons.io.FileUtils
+
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
         classpath 'org.gebish:geb-gradle:2.2'
+        classpath 'commons-io:commons-io:2.6'
     }
 }
 
 apply plugin: "idea"
 apply plugin: "groovy"
+apply plugin: "geb-browserstack"
 
-dependencies {
-    def gebVersion = "2.2" //Uses Binaries and not JAR
-    def seleniumVersion = "2.42.0"
-
-    // If using Spock, need to depend on geb-spock
-    testCompile "org.gebish:geb-spock:$gebVersion"
-    compile "org.spockframework:spock-core:0.7-groovy-2.0"
-    compile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
-    compile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
-
+ext {
+    gebVersion = '2.2'
+    spockVersion = '1.1-groovy-2.4'
+    seleniumVersion = '3.14.0'
+    chromeDriverVersion = '2.41'
 }
 
+dependencies {
+    testCompile "org.gebish:geb-spock:$gebVersion"
+    testCompile "org.spockframework:spock-core:$spockVersion"
+    testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+}
 
 repositories {
     jcenter()
 }
 
-//don't disable test task on the root, you'll use it to run the tests locally
+task downloadChromeDriver {
+    def outputFile = file("$buildDir/webdriver/chromedriver.zip")
+    inputs.property("chromeDriverVersion", chromeDriverVersion)
+    outputs.file(outputFile)
+
+    doLast {
+        def driverOsFilenamePart
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+            driverOsFilenamePart = "win32"
+        } else if (Os.isFamily(Os.FAMILY_MAC)) {
+            driverOsFilenamePart = "mac64"
+        } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+            driverOsFilenamePart = Os.isArch("amd64") ? "linux64" : "linux32"
+        }
+        FileUtils.copyURLToFile(new URL("http://chromedriver.storage.googleapis.com/${chromeDriverVersion}/chromedriver_${driverOsFilenamePart}.zip"), outputFile)
+    }
+}
+
+task unzipChromeDriver(type: Copy) {
+    def outputDir = file("$buildDir/webdriver/chromedriver")
+    dependsOn downloadChromeDriver
+    outputs.dir(outputDir)
+
+    from(zipTree(downloadChromeDriver.outputs.files.singleFile))
+    into(outputDir)
+}
+
 test {
+    include "**/*Spec*"
+
+    reports {
+        html.destination = reporting.file("$name/tests")
+        junitXml.destination = file("$buildDir/test-results/$name")
+    }
+
+    systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
+    systemProperty "geb.env", "chrome"
+
+    dependsOn unzipChromeDriver
+
+    def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
+    systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename).absolutePath
+
+    systemProperty "geb.build.baseUrl", "https://stg.pro.skilling.com"
     systemProperty "geb.build.reportsDir", reporting.file("$project.buildDir/test-results/$name/geb")
-    systemProperty "geb.env", 'firefox' //select an env/browser for local testing
 }
 
-subprojects { project ->
-    apply plugin: "geb-browserstack"
+browserStack {
+    application "https://www.google.com"
+    task {
+        testClassesDir = rootProject.test.testClassesDir
+        testSrcDirs = rootProject.test.testSrcDirs
+        classpath = rootProject.test.classpath
 
-    browserStack {
-        application "https://www.google.com"
-        task {
-            testClassesDir = rootProject.test.testClassesDir
-            testSrcDirs = rootProject.test.testSrcDirs
-            classpath = rootProject.test.classpath
-
-            systemProperty "geb.build.reportsDir", reporting.file("$project.buildDir/test-results/$name/geb")
-        }
-        account {
-            username = "<username>"
-            accessKey = "<automate-key>"
-        }
-        //tunnelJar = new File(project.buildDir, "tunnel.jar")
+        systemProperty "geb.build.reportsDir", reporting.file("$project.buildDir/test-results/$name/geb")
     }
-}
-
-project('firefox') {
-    browserStack {
-        browsers {
-            firefox_windows
-        }
-        account {
-            localId = 'ff'
-        }
-        task {
-            systemProperty 'browserstack.localIdentifier', 'ff'
-        }
-    }
-}
-
-project('chrome') {
-    browserStack {
-        browsers {
-            chrome_mac
-        }
-        account {
-            localId = 'chr'
-        }
-        task {
-            systemProperty 'browserstack.localIdentifier', 'chr'
-        }
+    account {
+        username = System.getenv('BROWSERSTACK_USERNAME')
+        accessKey = System.getenv('BROWSERSTACK_ACCESS_KEY')
     }
 }
