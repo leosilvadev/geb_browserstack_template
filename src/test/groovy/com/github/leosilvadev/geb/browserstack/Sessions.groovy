@@ -23,13 +23,11 @@ class Sessions {
 
     static void failCurrentSession(Throwable ex) {
         def id = currentSession().automation_session.hashed_id
-        println(String.format(URL_UPDATE_SESSION, id))
         def response = Unirest.put(String.format(URL_UPDATE_SESSION, id))
                 .header('Content-Type', 'application/json')
                 .basicAuth(System.getenv('BROWSERSTACK_USERNAME'), System.getenv('BROWSERSTACK_ACCESS_KEY'))
                 .body(mapper.writeValueAsString([status: 'failed', reason: ex.message]))
                 .asString()
                 .body
-        println(response)
     }
 }

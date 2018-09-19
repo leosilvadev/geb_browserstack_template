@@ -1,29 +1,22 @@
 import geb.driver.BrowserStackDriverFactory
-import geb.report.ReportState
-import geb.report.Reporter
-import geb.report.ReportingListener
-
-//baseUrl = "https://***.net"
 
 waiting {
     timeout = 10
 }
 
-reportingListener = new ReportingListener() {
-    void onReport(Reporter reporter, ReportState reportState, List<File> reportFiles) {
-        reportFiles.each {
-            println "[[ATTACHMENT|$it.absolutePath]]"
-        }
-    }
-}
-
-def browserStackBrowser = System.getProperty("geb.browserstack.browser")
+def browserStackBrowser = System.getProperty('geb.browserstack.browser')
 if (browserStackBrowser) {
     driver = {
-        def username = System.getenv("GEB_BROWSERSTACK_USERNAME")
+        def username = System.getenv('GEB_BROWSERSTACK_USERNAME')
         assert username
-        def accessKey = System.getenv("GEB_BROWSERSTACK_AUTHKEY")
+        def accessKey = System.getenv('GEB_BROWSERSTACK_AUTHKEY')
         assert accessKey
-        new BrowserStackDriverFactory().create(browserStackBrowser, username, accessKey)
+
+        def capabilities = [
+                build: "Build ${new Date().format('dd-MM-yyyy')}",
+                name: "Name ${new Date().format('dd-MM-yyyy HH:mm:ss')}",
+                project: System.getenv().get('GEB_BROWSERSTACK_PROJECT', 'Project Geb test')
+        ]
+        new BrowserStackDriverFactory().create(browserStackBrowser, username, accessKey, capabilities)
     }
 }

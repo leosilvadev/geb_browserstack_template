@@ -16,7 +16,7 @@ class GoogleSearchSpec extends GebSpec {
         and: 'the term is set in the search input'
         at(GoogleSearchPage).searchFor(term)
 
-        then:
+        then: 'ten results should be shown'
         at(GoogleResultsPage).hasResults(10)
     }
 
