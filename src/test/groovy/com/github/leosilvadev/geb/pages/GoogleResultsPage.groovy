@@ -4,7 +4,11 @@ import geb.Page
 
 class GoogleResultsPage extends Page {
 
-    static at = { txtSearch.displayed && boxResults*.displayed }
+    static at = {
+        waitFor {
+            txtSearch.displayed && boxResults*.displayed
+        }
+    }
 
     static content = {
         txtSearch { $('#lst-ib') }
