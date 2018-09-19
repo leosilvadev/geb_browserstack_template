@@ -2,9 +2,9 @@ package com.github.leosilvadev.geb.specs
 
 import com.github.leosilvadev.geb.pages.GoogleResultsPage
 import com.github.leosilvadev.geb.pages.GoogleSearchPage
-import geb.spock.GebSpec
+import geb.spock.GebReportingSpec
 
-class GoogleSearchSpec extends GebSpec {
+class GoogleSearchSpec extends GebReportingSpec {
 
     def 'Should search in google'() {
         given: 'a term'
