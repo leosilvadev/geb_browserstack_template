@@ -16,16 +16,20 @@ apply plugin: "groovy"
 apply plugin: "geb-browserstack"
 
 ext {
-    gebVersion = '2.2'
-    spockVersion = '1.1-groovy-2.4'
-    seleniumVersion = '3.14.0'
     chromeDriverVersion = '2.41'
+    gebVersion = '2.2'
+    jacksonVersion = '2.9.6'
+    seleniumVersion = '3.14.0'
+    spockVersion = '1.1-groovy-2.4'
+    unirestVersion = '1.4.9'
 }
 
 dependencies {
+    testCompile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    testCompile "com.mashape.unirest:unirest-java:$unirestVersion"
     testCompile "org.gebish:geb-spock:$gebVersion"
-    testCompile "org.spockframework:spock-core:$spockVersion"
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+    testCompile "org.spockframework:spock-core:$spockVersion"
 }
 
 repositories {
