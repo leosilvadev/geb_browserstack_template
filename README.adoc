@@ -1,0 +1,27 @@
+= Geb + Spock + Browserstack project template
+
+== Why Geb
+
+Selenium is not productive before you write down A LOT of helpers for your company's project.
+Geb already comes with a lot a syntax sugar and Page Object support to help you!
+
+== Why Spock
+
+Writing JUnit-like tests does not help you to document your tests, and no one want to keep
+the test specifications in many places, right?
+Spock is a test framework that helps you define your tests specifications as you write the tests,
+following the BDD (Behavior Driven Design) way-of-life
+
+== Why Browserstack
+
+Because it is jut great, and I should not convince you of that :)
+
+= How does that work?
+
+Clone the project, remove the current pages and specs and write down your pages/specs.
+
+= What do I have using this template?
+
+- Browserstack integrated, just define your environment variables (or change the code to fetch it from somewhere else)
+- When any test fails, it calls Browserstack rest api to mark it as failed
+- Use the current pages and specs as a guide, in case you are still not confortable with Geb and Spock
