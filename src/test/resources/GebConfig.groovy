@@ -1,4 +1,5 @@
 import geb.driver.BrowserStackDriverFactory
+import com.github.leosilvadev.geb.browserstack.config.BrowserstackConfig as config
 
 waiting {
   timeout = 10
@@ -7,16 +8,16 @@ waiting {
 def browserStackBrowser = System.getProperty('geb.browserstack.browser')
 if (browserStackBrowser) {
   driver = {
-    def username = System.getenv('GEB_BROWSERSTACK_USERNAME')
-    assert username
-    def accessKey = System.getenv('GEB_BROWSERSTACK_AUTHKEY')
-    assert accessKey
-
     def capabilities = [
-      build  : System.getenv('GEB_BROWSERSTACK_BUILD') ?: 'Default build',
-      name   : new Date().format("dd/MM/yyyy HH:mm:ss"),
-      project: System.getenv('GEB_BROWSERSTACK_PROJECT') ?: 'Project Geb test'
+      build  : config.buildName(),
+      name   : config.initialSessionName(),
+      project: config.project()
     ]
-    new BrowserStackDriverFactory().create(browserStackBrowser, username, accessKey, capabilities)
+    new BrowserStackDriverFactory().create(
+      browserStackBrowser,
+      config.username(),
+      config.accessKey(),
+      capabilities
+    )
   }
 }
