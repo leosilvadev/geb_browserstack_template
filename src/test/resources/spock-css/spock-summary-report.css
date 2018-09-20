@@ -1,0 +1,90 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 300;
+
+  background: #C9D6FF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+h2 {
+  font-weight: 400;
+  text-align: center;
+}
+
+h3 {
+  font-weight: 200;
+  text-align: center;
+}
+
+table {
+  margin: 5px;
+}
+
+div.summary-report {
+  text-align: center;
+}
+
+div.project-header {
+  margin-bottom: 10px;
+  font-size: large;
+}
+
+div.project-header > span.project-name {
+
+}
+
+div.project-header > span.project-version {
+  padding-left: 20px;
+}
+
+div.date-test-ran {
+  font-size: small;
+  font-style: italic;
+}
+
+div.spec-title {
+  padding: 10px 0px 5px 0px;
+}
+
+table th:first-child {
+  border-radius: 6px 0px 0px 0px;
+}
+
+table th:last-child {
+  border-radius: 0px 6px 0px 0px;
+}
+
+table.summary-table {
+  width: 800px;
+  text-align: left;
+  font-weight: 500;
+  font-size: small;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.summary-table th {
+  background: #b9c8f7;
+  padding: 6px;
+  text-align: center;
+}
+
+table.summary-table td {
+  background: #f7f7f7;
+  padding: 6px;
+  text-align: center;
+}
+
+tr.error td, td.error {
+  background-color: #F89A4F !important;
+}
+
+tr.failure td, td.failure {
+  color: red;
+}
+
+div.footer {
+  text-align: center;
+  font-size: small;
+}
