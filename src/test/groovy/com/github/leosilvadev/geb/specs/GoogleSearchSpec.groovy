@@ -19,4 +19,18 @@ class GoogleSearchSpec extends FeatureSpec {
     at(GoogleResultsPage).hasResults(10)
   }
 
+  def 'Should search in google and fail'() {
+    given: 'a term'
+    def term = 'Geb spock browserstack setup'
+
+    when: 'the google page is opened'
+    to(GoogleSearchPage)
+
+    and: 'the term is set in the search input'
+    at(GoogleSearchPage).searchFor(term)
+
+    then: 'ten results should be shown'
+    at(GoogleResultsPage).hasResults(9)
+  }
+
 }
