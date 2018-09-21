@@ -20,7 +20,7 @@ class Sessions {
       .basicAuth(config.username(), config.accessKey())
       .asString()
       .body
-    
+
     def sessions = mapper.readValue(json, List)
     sessions ? sessions.head() : [:]
   }

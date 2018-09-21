@@ -14,12 +14,16 @@ if (browserStackBrowser) {
    * - SESSION_PER_SPEC:
    * create a new session in browserstack for each new specification and
    * record all the tests methods in this session.
-   * This mode cleans the cache and close the browser after the method execution
+   * This mode cleans the cache and close the browser after the method execution.
    *
    *
    * - SESSION_PER_METHOD:
    * create a new session for each method in each specification.
-   * This mode keeps the cache and the opened browser for the whole specification
+   * This mode keeps the cache and the opened browser for the whole specification.
+   *
+   * * Important:
+   * SESSION_PER_METHOD mode adds some overhead in execution time, since it
+   * clear the cache and close the browser after each method.
    **/
   BrowserstackConfig.setMode(BrowserstackConfig.SessionMode.SESSION_PER_METHOD)
   driver = {
