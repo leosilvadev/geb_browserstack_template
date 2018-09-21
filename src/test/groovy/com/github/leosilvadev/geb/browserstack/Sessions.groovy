@@ -3,6 +3,7 @@ package com.github.leosilvadev.geb.browserstack
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mashape.unirest.http.Unirest
 import com.github.leosilvadev.geb.browserstack.config.BrowserstackConfig as config
+import groovy.json.JsonOutput
 
 import static java.lang.String.format
 
@@ -19,7 +20,7 @@ class Sessions {
       .basicAuth(config.username(), config.accessKey())
       .asString()
       .body
-
+    
     def sessions = mapper.readValue(json, List)
     sessions ? sessions.head() : [:]
   }

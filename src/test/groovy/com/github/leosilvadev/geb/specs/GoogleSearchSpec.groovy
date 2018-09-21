@@ -5,9 +5,9 @@ import com.github.leosilvadev.geb.pages.GoogleSearchPage
 
 class GoogleSearchSpec extends FeatureSpec {
 
-  def 'Should search in google'() {
+  def 'Should search in googlea'() {
     given: 'a term'
-    def term = 'Geb spock browserstack setup'
+    def term = 'Geb spock browserstack setup 1'
 
     when: 'the google page is opened'
     to(GoogleSearchPage)
@@ -21,7 +21,7 @@ class GoogleSearchSpec extends FeatureSpec {
 
   def 'Should search in google and fail'() {
     given: 'a term'
-    def term = 'Geb spock browserstack setup'
+    def term = 'Geb spock browserstack setup 2'
 
     when: 'the google page is opened'
     to(GoogleSearchPage)
