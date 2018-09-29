@@ -41,7 +41,8 @@ repositories {
 
 browserStack {
   task {
-    systemProperty "geb.build.reportsDir", reporting.file("$project.buildDir/test-results/$name/geb")
+    systemProperty 'geb.build.reportsDir', reporting.file("$project.buildDir/test-results/$name/geb")
+    systemProperty 'com.athaydes.spockframework.report.outputDir', 'build/reports/docs'
   }
   browsers {
     create('edge_windows_17') {
