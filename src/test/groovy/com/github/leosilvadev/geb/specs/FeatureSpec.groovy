@@ -1,16 +1,15 @@
 package com.github.leosilvadev.geb.specs
 
 import com.github.leosilvadev.geb.browserstack.Sessions
-import com.github.leosilvadev.geb.browserstack.config.BrowserstackConfig
+import com.github.leosilvadev.geb.browserstack.config.BrowserStackConfig
 import geb.driver.CachingDriverFactory
-import geb.spock.GebReportingSpec
 import geb.spock.GebSpec
 
 class FeatureSpec extends GebSpec {
 
   def cleanup() {
     def specName = specificationContext.currentSpec.name
-    if (BrowserstackConfig.isModeSessionPerSpec()) {
+    if (BrowserStackConfig.isModeSessionPerSpec()) {
       Sessions.setSessionName(specName)
 
     } else {

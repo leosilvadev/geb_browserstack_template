@@ -1,6 +1,5 @@
-import com.github.leosilvadev.geb.browserstack.config.BrowserstackConfig
 import geb.driver.BrowserStackDriverFactory
-import com.github.leosilvadev.geb.browserstack.config.BrowserstackConfig as config
+import com.github.leosilvadev.geb.browserstack.config.BrowserStackConfig as config
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
@@ -14,7 +13,7 @@ environments {
     atCheckWaiting = true
     driver = { new ChromeDriver() }
   }
-  chrome_headless {
+  chromeHeadless {
     atCheckWaiting = true
     driver = {
       ChromeOptions o = new ChromeOptions()

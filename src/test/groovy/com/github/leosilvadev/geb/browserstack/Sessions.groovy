@@ -2,8 +2,7 @@ package com.github.leosilvadev.geb.browserstack
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mashape.unirest.http.Unirest
-import com.github.leosilvadev.geb.browserstack.config.BrowserstackConfig as config
-import groovy.json.JsonOutput
+import com.github.leosilvadev.geb.browserstack.config.BrowserStackConfig as config
 
 import static java.lang.String.format
 

@@ -2,7 +2,7 @@ package com.github.leosilvadev.geb.browserstack.config
 
 import java.util.concurrent.atomic.AtomicReference
 
-class BrowserstackConfig {
+class BrowserStackConfig {
 
   private static AtomicReference<SessionMode> modeRef
 
