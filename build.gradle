@@ -27,7 +27,7 @@ ext {
   spockReportVersion = '1.6.0'
   unirestVersion = '1.4.9'
 
-  drivers = ["firefox", "chrome", "chrome_headless"]
+  drivers = ["firefox", "chrome", "chromeHeadless"]
   ext {
     groovyVersion = '2.4.12'
     gebVersion = '2.2'
@@ -96,7 +96,7 @@ browserStack {
 }
 
 drivers.each { driver ->
-  task "${driver}_test"(type: Test) {
+  task "${driver}Test"(type: Test) {
     group 'Geb Local Tests'
 
     outputs.upToDateWhen { false }  // Always run tests
