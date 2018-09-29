@@ -1,4 +1,4 @@
-package com.github.leosilvadev.geb.specs
+package com.github.leosilvadev.geb.specs.google
 
 import com.github.leosilvadev.geb.browserstack.Sessions
 import com.github.leosilvadev.geb.browserstack.config.BrowserstackConfig
