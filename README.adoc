@@ -1,5 +1,43 @@
 = Geb + Spock + Browserstack project template
 
+== Let's run it before you understand the reasons of this project
+
+This project requires JDK 8 to run.
+
+If you are lost on how to manager your JDK versions, I suggest to use https://sdkman.io/install[SDKMAN] for that.
+
+=== Running locally
+
+To run locally you can run with chrome, chrome-headless or firefox.
+The previous commands are:
+
+```
+./gradlew clean chromeTest
+./gradlew clean chromeHeadlessTest
+./gradlew clean firefoxTest
+```
+
+**Important: This will download the driver and run it for you.**
+
+=== Running in BrowserStack
+
+To run in BrowserStack you need to export two environment variables: **BROWSERSTACK_USERNAME** and **BROWSERSTACK_ACCESS_KEY**.
+After that, the current available jobs are:
+
+```
+./gradlew clean allBrowserStackTests
+./gradlew clean chromeMac69Test
+./gradlew clean chromeWindows69Test
+./gradlew clean edgeWindows17Test
+./gradlew clean firefoxMac62Test
+./gradlew clean firefoxWindows62Test
+./gradlew clean internetExplorerWindows11Test
+./gradlew clean safariMac11.1Test
+```
+
+**Important 1: you can check all the possible configurations inside the class https://github.com/leosilvadev/geb_browserstack_template/blob/master/src/test/groovy/com/github/leosilvadev/geb/browserstack/config/BrowserstackConfig.groovy[BrowserStackConfig]**
+**Important 2: you can add more tests with all the different OS, browsers and etc, just add them in  https://github.com/leosilvadev/geb_browserstack_template/blob/master/build.gradle[build.gradle]**
+
 == Why Geb
 
 Selenium is not productive before you write down A LOT of helpers for your company's project.
