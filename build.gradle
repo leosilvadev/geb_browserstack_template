@@ -64,7 +64,7 @@ webdriverBinaries {
 browserStack {
   task {
     systemProperty 'geb.build.reportsDir', reporting.file("$project.buildDir/test-results/$name/geb")
-    systemProperty 'com.athaydes.spockframework.report.outputDir', 'build/reports/docs'
+    systemProperty 'com.athaydes.spockframework.report.outputDir', reporting.file("$project.buildDir/reports/docs/$name")
   }
   browsers {
     create('edge_windows_17') {
@@ -102,6 +102,7 @@ drivers.each { driver ->
     outputs.upToDateWhen { false }  // Always run tests
 
     systemProperty "geb.build.reportsDir", reporting.file("$project.buildDir/test-results/$name/geb")
+    systemProperty 'com.athaydes.spockframework.report.outputDir', reporting.file("$project.buildDir/reports/docs/$name")
     systemProperty "geb.env", driver
   }
 }

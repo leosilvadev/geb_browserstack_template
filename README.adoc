@@ -38,6 +38,14 @@ After that, the current available jobs are:
 **Important 1: you can check all the possible configurations inside the class https://github.com/leosilvadev/geb_browserstack_template/blob/master/src/test/groovy/com/github/leosilvadev/geb/browserstack/config/BrowserStackConfig.groovy[BrowserStackConfig]**
 **Important 2: you can add more tests with all the different OS, browsers and etc, just add them in  https://github.com/leosilvadev/geb_browserstack_template/blob/master/build.gradle[build.gradle]**
 
+== After running the tests (locally or BrowserStack)
+
+Some reports will be generated in the **build/reports** directory, they are:
+- reports/tests/$YOURTASKNAME: gradle report, it shows all the tests that ran and their status
+- reports/docs/$YOURTASKNAME: spock report, it shows all the tests with details (all the descriptions)
+
+**Important: the spock report is currently ugly, I am not a designer, but you can make it look much better just changing https://github.com/leosilvadev/geb_browserstack_template/tree/master/src/test/resources/spock-css[this css files]**
+
 == Why Geb
 
 Selenium is not productive before you write down A LOT of helpers for your company's project.
