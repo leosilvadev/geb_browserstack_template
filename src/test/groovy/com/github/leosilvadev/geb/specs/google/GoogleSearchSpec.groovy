@@ -1,7 +1,7 @@
 package com.github.leosilvadev.geb.specs.google
 
-import com.github.leosilvadev.geb.pages.GoogleResultsPage
-import com.github.leosilvadev.geb.pages.GoogleSearchPage
+import com.github.leosilvadev.geb.pages.google.GoogleResultsPage
+import com.github.leosilvadev.geb.pages.google.GoogleSearchPage
 
 class GoogleSearchSpec extends FeatureSpec {
 

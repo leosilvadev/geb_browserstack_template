@@ -1,4 +1,4 @@
-package com.github.leosilvadev.geb.pages
+package com.github.leosilvadev.geb.pages.google
 
 import geb.Page
 
