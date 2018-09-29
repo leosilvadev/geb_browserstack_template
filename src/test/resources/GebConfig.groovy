@@ -1,9 +1,31 @@
 import com.github.leosilvadev.geb.browserstack.config.BrowserstackConfig
 import geb.driver.BrowserStackDriverFactory
 import com.github.leosilvadev.geb.browserstack.config.BrowserstackConfig as config
+import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.chrome.ChromeOptions
+import org.openqa.selenium.firefox.FirefoxDriver
 
 waiting {
-  timeout = 10
+  timeout = 5
+}
+
+environments {
+  chrome {
+    atCheckWaiting = true
+    driver = { new ChromeDriver() }
+  }
+  chrome_headless {
+    atCheckWaiting = true
+    driver = {
+      ChromeOptions o = new ChromeOptions()
+      o.addArguments('headless')
+      new ChromeDriver(o)
+    }
+  }
+  firefox {
+    atCheckWaiting = true
+    driver = { new FirefoxDriver() }
+  }
 }
 
 def browserStackBrowser = System.getProperty('geb.browserstack.browser')

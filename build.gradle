@@ -1,42 +1,64 @@
 buildscript {
   repositories {
     jcenter()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
   }
   dependencies {
     classpath 'org.gebish:geb-gradle:2.2'
     classpath 'commons-io:commons-io:2.6'
+    classpath 'gradle.plugin.com.energizedwork.webdriver-binaries:webdriver-binaries-gradle-plugin:1.4'
   }
 }
 
 apply plugin: "idea"
 apply plugin: "groovy"
 apply plugin: "geb-browserstack"
+apply plugin: "com.energizedwork.webdriver-binaries"
 
 ext {
   chromeDriverVersion = '2.41'
   gebVersion = '2.2'
   jacksonVersion = '2.9.6'
   seleniumVersion = '3.14.0'
+  slf4jVersion = '1.7.13'
   spockVersion = '1.1-groovy-2.4'
+  spockReportVersion = '1.6.0'
   unirestVersion = '1.4.9'
+
+  drivers = ["firefox", "chrome", "chrome_headless"]
+  ext {
+    groovyVersion = '2.4.12'
+    gebVersion = '2.2'
+    seleniumVersion = '3.6.0'
+    chromeDriverVersion = '2.32'
+    geckoDriverVersion = '0.18.0'
+  }
 }
 
 dependencies {
+  testCompile("com.athaydes:spock-reports:$spockReportVersion") {
+    transitive = false
+  }
   testCompile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
   testCompile "com.mashape.unirest:unirest-java:$unirestVersion"
   testCompile "org.gebish:geb-spock:$gebVersion"
   testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+  testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
   testCompile "org.spockframework:spock-core:$spockVersion"
-
-  testCompile( 'com.athaydes:spock-reports:1.6.0' ) {
-    transitive = false
-  }
-  testCompile 'org.slf4j:slf4j-api:1.7.13'
-  testCompile 'org.slf4j:slf4j-simple:1.7.13'
+  testCompile "org.slf4j:slf4j-api:$slf4jVersion"
+  testCompile "org.slf4j:slf4j-simple:$slf4jVersion"
 }
 
 repositories {
   jcenter()
+  mavenCentral()
+}
+
+webdriverBinaries {
+  chromedriver chromeDriverVersion
+  geckodriver geckoDriverVersion
 }
 
 browserStack {
@@ -70,5 +92,16 @@ browserStack {
   account {
     username = System.getenv('BROWSERSTACK_USERNAME')
     accessKey = System.getenv('BROWSERSTACK_ACCESS_KEY')
+  }
+}
+
+drivers.each { driver ->
+  task "${driver}_test"(type: Test) {
+    group 'Geb Local Tests'
+
+    outputs.upToDateWhen { false }  // Always run tests
+
+    systemProperty "geb.build.reportsDir", reporting.file("$project.buildDir/test-results/$name/geb")
+    systemProperty "geb.env", driver
   }
 }
