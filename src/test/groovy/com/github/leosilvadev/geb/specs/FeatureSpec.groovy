@@ -1,11 +1,12 @@
-package com.github.leosilvadev.geb.specs.google
+package com.github.leosilvadev.geb.specs
 
 import com.github.leosilvadev.geb.browserstack.Sessions
 import com.github.leosilvadev.geb.browserstack.config.BrowserstackConfig
 import geb.driver.CachingDriverFactory
 import geb.spock.GebReportingSpec
+import geb.spock.GebSpec
 
-class FeatureSpec extends GebReportingSpec {
+class FeatureSpec extends GebSpec {
 
   def cleanup() {
     def specName = specificationContext.currentSpec.name
