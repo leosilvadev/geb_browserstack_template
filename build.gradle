@@ -40,7 +40,6 @@ repositories {
 }
 
 browserStack {
-  application "https://www.google.com"
   task {
     systemProperty "geb.build.reportsDir", reporting.file("$project.buildDir/test-results/$name/geb")
   }
