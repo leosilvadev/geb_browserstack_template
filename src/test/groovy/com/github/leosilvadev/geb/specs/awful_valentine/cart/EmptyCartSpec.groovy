@@ -1,10 +1,10 @@
-package com.github.leosilvadev.geb.specs.awful_valentine
+package com.github.leosilvadev.geb.specs.awful_valentine.cart
 
 import com.github.leosilvadev.geb.pages.awful_valentine.CartPage
 import com.github.leosilvadev.geb.pages.awful_valentine.HomePage
 import com.github.leosilvadev.geb.specs.FeatureSpec
 
-class CartSpec extends FeatureSpec {
+class EmptyCartSpec extends FeatureSpec {
 
     def 'Customer should go to home page, then go to cart page and see an empty cart'() {
         when: 'the customer goes to the home page'
