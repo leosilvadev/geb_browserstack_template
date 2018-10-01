@@ -3,6 +3,7 @@ package com.github.leosilvadev.geb.specs.awful_valentine.cart
 import com.github.leosilvadev.geb.pages.awful_valentine.CartPage
 import com.github.leosilvadev.geb.pages.awful_valentine.HomePage
 import com.github.leosilvadev.geb.specs.FeatureSpec
+import spock.lang.Ignore
 
 class CartSpec extends FeatureSpec {
 
@@ -20,10 +21,10 @@ class CartSpec extends FeatureSpec {
         at(HomePage).add_product_modal.confirm()
 
         then: 'he should be redirected to the cart page and see no item on it'
-        at(CartPage).has_items(1)
+        at(CartPage).items() == 1
 
         and:
-        at(CartPage).item_has_quantity(0, 1)
+        at(CartPage).item_quantity(0) == 1
     }
 
 }

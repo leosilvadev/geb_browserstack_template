@@ -1,6 +1,7 @@
 package com.github.leosilvadev.geb.modules.awful_valentine
 
 import geb.Module
+import geb.navigator.Navigator
 
 class SpecialItemsMenu extends Module {
 
@@ -8,7 +9,7 @@ class SpecialItemsMenu extends Module {
         item_containers { $('#special-items > .special-item') }
     }
 
-    def add_to_cart(item_index) {
+    Navigator add_to_cart(item_index) {
         def button = item_containers[item_index].find('a.add-to-cart')
         button.click()
     }

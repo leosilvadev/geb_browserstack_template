@@ -2,6 +2,7 @@ package com.github.leosilvadev.geb.modules.awful_valentine
 
 import com.github.leosilvadev.geb.pages.awful_valentine.CartPage
 import geb.Module
+import geb.navigator.Navigator
 
 class AddProductModal extends Module {
 
@@ -15,7 +16,7 @@ class AddProductModal extends Module {
         container.displayed
     }
 
-    def confirm() {
+    Navigator confirm() {
         confirm_add_button.click()
     }
 
