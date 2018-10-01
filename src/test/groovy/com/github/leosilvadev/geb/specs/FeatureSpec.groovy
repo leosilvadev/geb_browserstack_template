@@ -8,6 +8,12 @@ import geb.spock.GebSpec
 class FeatureSpec extends GebSpec {
 
   def cleanup() {
+    if (BrowserStackConfig.browser()) {
+      updateSessionInBrowserStack()
+    }
+  }
+
+  private void updateSessionInBrowserStack() {
     def specName = specificationContext.currentSpec.name
     if (BrowserStackConfig.isModeSessionPerSpec()) {
       Sessions.setSessionName(specName)

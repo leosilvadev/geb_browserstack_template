@@ -14,6 +14,10 @@ class BrowserStackConfig {
     modeRef.set(mode)
   }
 
+  static String browser() {
+    System.getProperty('geb.browserstack.browser')
+  }
+
   static String urlFor(final String path) {
     "https://api.browserstack.com/automate$path"
   }

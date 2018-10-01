@@ -27,8 +27,7 @@ environments {
   }
 }
 
-def browserStackBrowser = System.getProperty('geb.browserstack.browser')
-if (browserStackBrowser) {
+if (config.browser()) {
 
   /**
    * Define the way you want to manager your browserstack sessions:
@@ -46,7 +45,7 @@ if (browserStackBrowser) {
    * SESSION_PER_METHOD mode adds some overhead in execution time, since it
    * clear the cache and close the browser after each method.
    **/
-  BrowserstackConfig.setMode(BrowserstackConfig.SessionMode.SESSION_PER_METHOD)
+  config.setMode(config.SessionMode.SESSION_PER_METHOD)
   driver = {
     def capabilities = [
       build  : config.buildName(),
@@ -54,7 +53,7 @@ if (browserStackBrowser) {
       project: config.project()
     ]
     new BrowserStackDriverFactory().create(
-      browserStackBrowser,
+      config.browser(),
       config.username(),
       config.accessKey(),
       capabilities
