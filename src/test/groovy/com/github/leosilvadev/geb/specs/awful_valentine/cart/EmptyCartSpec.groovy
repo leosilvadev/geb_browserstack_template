@@ -6,7 +6,7 @@ import com.github.leosilvadev.geb.specs.FeatureSpec
 
 class EmptyCartSpec extends FeatureSpec {
 
-    def 'Customer should go to home page, then go to cart page and see an empty cart'() {
+    def 'Customer have an empty Cart before adding any product'() {
         when: 'the customer goes to the home page'
         to(HomePage)
 

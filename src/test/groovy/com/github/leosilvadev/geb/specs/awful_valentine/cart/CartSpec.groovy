@@ -7,7 +7,7 @@ import spock.lang.Ignore
 
 class CartSpec extends FeatureSpec {
 
-    def 'Customer should go to home page, then go to cart page and see an empty cart'() {
+    def 'Customer should add a product in the Cart'() {
         when: 'the customer goes to the home page'
         to(HomePage)
 
