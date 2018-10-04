@@ -17,7 +17,9 @@ class AddProductModal extends Module {
     }
 
     Navigator confirm() {
-        confirm_add_button.click()
+        interact {
+            click confirm_add_button
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package com.github.leosilvadev.geb.specs.awful_valentine.cart
 
 import com.github.leosilvadev.geb.pages.awful_valentine.CartPage
+import com.github.leosilvadev.geb.pages.awful_valentine.CheckoutPage
 import com.github.leosilvadev.geb.pages.awful_valentine.HomePage
 import com.github.leosilvadev.geb.specs.FeatureSpec
 import spock.lang.Stepwise
@@ -50,6 +51,14 @@ class CartSpec extends FeatureSpec {
         and: 'the both items must have one unit'
         at(CartPage).item_quantity(0) == 1
         at(CartPage).item_quantity(1) == 1
+    }
+
+    def 'Customer should be able to checkout his cart'() {
+        when: 'the customer clicks in the "checkout" button'
+        at(CartPage).checkout()
+
+        then: 'he should be redirected to the checkout page'
+        at(CheckoutPage)
     }
 
 }

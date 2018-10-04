@@ -6,7 +6,9 @@ class CheckoutPage extends Page {
 
     static url = 'http://awful-valentine.com/store/checkout/'
 
-    static at = {}
+    static at = {
+        title.startsWith('Checkout ')
+    }
 
     static content = {
         item_containers { $('#viewCartTable > tbody > tr').not('.subtotal, .shipping, .tax-row, .total') }
