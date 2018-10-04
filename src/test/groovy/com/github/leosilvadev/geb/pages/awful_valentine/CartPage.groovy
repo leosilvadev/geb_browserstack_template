@@ -2,6 +2,7 @@ package com.github.leosilvadev.geb.pages.awful_valentine
 
 import com.github.leosilvadev.geb.modules.awful_valentine.HeaderMenu
 import geb.Page
+import geb.navigator.Navigator
 
 class CartPage extends Page {
 
@@ -19,6 +20,8 @@ class CartPage extends Page {
         empty_card_container(required: false){ $('#emptyCartMsg') }
 
         item_containers { $('#viewCartTable > tbody > tr').not('.subtotal, .shipping, .tax-row, .total') }
+
+        continue_shopping_button { $('#continueShopping') }
     }
 
     boolean has_no_items() {
@@ -37,6 +40,10 @@ class CartPage extends Page {
         }
 
         item_quantity_inputs[item_index].value().toInteger()
+    }
+
+    Navigator continue_shopping() {
+        continue_shopping_button.click()
     }
 
 }
