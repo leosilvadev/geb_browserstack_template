@@ -21,7 +21,8 @@ class CartPage extends Page {
 
         item_containers { $('#viewCartTable > tbody > tr').not('.subtotal, .shipping, .tax-row, .total') }
 
-        continue_shopping_button { $('#continueShopping') }
+        continue_shopping_button(to: HomePage) { $('#continueShopping') }
+        checkout_button(to: CheckoutPage) { $('#Cart66CheckoutButton') }
     }
 
     boolean has_no_items() {
@@ -44,6 +45,10 @@ class CartPage extends Page {
 
     Navigator continue_shopping() {
         continue_shopping_button.click()
+    }
+
+    Navigator checkout() {
+        checkout_button.click()
     }
 
 }
