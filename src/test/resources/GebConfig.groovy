@@ -5,7 +5,7 @@ import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
 
 waiting {
-  timeout = 5
+  timeout = 10
 }
 
 environments {
