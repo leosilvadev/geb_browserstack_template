@@ -27,7 +27,7 @@ class HeaderMenu extends Module {
     Navigator go_to_cart() {
         interact {
             moveToElement store_button
-            waitFor { cart_button.displayed }
+            cart_button.displayed
             click cart_button   
         }
     }
