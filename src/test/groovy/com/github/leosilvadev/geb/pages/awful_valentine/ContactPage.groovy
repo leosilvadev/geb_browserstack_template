@@ -1,5 +1,6 @@
 package com.github.leosilvadev.geb.pages.awful_valentine
 
+import com.github.leosilvadev.geb.modules.awful_valentine.HeaderMenu
 import geb.Page
 import geb.navigator.Navigator
 
@@ -8,10 +9,12 @@ class ContactPage extends Page {
     static url = 'http://awful-valentine.com/contact-us/'
 
     static at = {
-
+        header_menu.get_current_page_button().text() == 'Contact Us'
     }
 
     static content = {
+        header_menu { module HeaderMenu }
+
         name_input { $('input[name=your-name]') }
         name_alert { $('span.your-name > span[role=alert]') }
 
