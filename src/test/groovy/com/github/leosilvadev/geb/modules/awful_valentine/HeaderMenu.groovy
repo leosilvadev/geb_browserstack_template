@@ -1,6 +1,7 @@
 package com.github.leosilvadev.geb.modules.awful_valentine
 
 import com.github.leosilvadev.geb.pages.awful_valentine.CartPage
+import com.github.leosilvadev.geb.pages.awful_valentine.ContactPage
 import com.github.leosilvadev.geb.pages.awful_valentine.HomePage
 import geb.Module
 import geb.navigator.Navigator
@@ -13,7 +14,7 @@ class HeaderMenu extends Module {
 
         home_button(to: HomePage) { $('#secondary-menu a') }
         code_button { $('#secondary-menu > li.page-item-38 > a') }
-        contact_button { $('#secondary-menu > li.page-item-59 > a') }
+        contact_button(to: ContactPage) { $('#secondary-menu > li.page-item-59 > a') }
         purchase_button { $('#secondary-menu > li.page-item-68 > a') }
         store_button { $('#secondary-menu > li.page-item-5 > a') }
 
