@@ -3,6 +3,7 @@ package com.github.leosilvadev.geb.pages.awful_valentine
 import com.github.leosilvadev.geb.modules.awful_valentine.HeaderMenu
 import geb.Page
 import geb.navigator.Navigator
+import geb.navigator.NonEmptyNavigator
 
 class ContactPage extends Page {
 
@@ -22,13 +23,14 @@ class ContactPage extends Page {
         email_alert { $('span.your-email > span[role=alert]') }
 
         subject_input { $('input[name=your-subject]') }
-        message_input { $('input[name=your-message]') }
+        message_input { $('textarea[name=your-message]') }
         submit_button { $('input[type=submit]') }
 
         alert_container { $('div[role=alert]') }
     }
 
     Navigator setName(String name) {
+        NonEmptyNavigator
         name_input.value(name)
     }
 
