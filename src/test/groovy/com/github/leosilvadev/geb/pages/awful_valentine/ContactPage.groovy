@@ -50,7 +50,11 @@ class ContactPage extends Page {
         submit_button.click()
     }
 
-    boolean hasAlertFor(String className) {
-        waitFor { $("span.${className} > span[role=alert]").displayed }
+    boolean hasAlertFor(String element) {
+        switch (element) {
+            case 'name': return waitFor { name_alert.displayed }
+            case 'email': return waitFor { email_alert.displayed }
+            default: return false
+        }
     }
 }
