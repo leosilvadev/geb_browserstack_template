@@ -13,14 +13,22 @@ class ContactSendValidationSpec extends FeatureSpec {
         when: 'the customer goes to the contact page'
         to(ContactPage)
 
-        and:
+        and: 'set the name as #name'
         at(ContactPage).setName(name)
+
+        and: 'set the email as #email'
         at(ContactPage).setEmail(email)
+
+        and: 'set the subject as #subject'
         at(ContactPage).setSubject(subject)
+
+        and: 'set the message as #message'
         at(ContactPage).setMessage(message)
+
+        and: 'submit the contact'
         at(ContactPage).submit()
 
-        then:
+        then: 'the element #element must show a validation error'
         at(ContactPage).hasAlertFor(element)
 
         where:
