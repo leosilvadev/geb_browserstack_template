@@ -18,7 +18,8 @@ apply plugin: "geb-browserstack"
 apply plugin: "com.energizedwork.webdriver-binaries"
 
 ext {
-  chromeDriverVersion = '2.41'
+  chromeDriverVersion = '2.42'
+  geckoDriverVersion = '0.23.0'
   gebVersion = '2.2'
   jacksonVersion = '2.9.6'
   seleniumVersion = '3.14.0'
@@ -26,15 +27,9 @@ ext {
   spockVersion = '1.1-groovy-2.4'
   spockReportVersion = '1.6.0'
   unirestVersion = '1.4.9'
+  groovyVersion = '2.4.12'
 
   drivers = ["firefox", "chrome", "chromeHeadless"]
-  ext {
-    groovyVersion = '2.4.12'
-    gebVersion = '2.2'
-    seleniumVersion = '3.6.0'
-    chromeDriverVersion = '2.32'
-    geckoDriverVersion = '0.18.0'
-  }
 }
 
 dependencies {
