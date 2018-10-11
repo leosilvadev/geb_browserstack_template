@@ -23,10 +23,10 @@ class CartSpec extends FeatureSpec {
         at(HomePage).add_product_modal.confirm()
 
         then: 'he should be redirected to the cart page and see one item on it'
-        at(CartPage).items() == 1
+        at(CartPage).hasItems(1)
 
         and: 'the item must have one unit'
-        at(CartPage).item_quantity(0) == 1
+        at(CartPage).hasQuantity(0, 1)
     }
 
     def 'Customer should be able to search and add more products after having a cart with product'() {
@@ -46,11 +46,11 @@ class CartSpec extends FeatureSpec {
         at(HomePage).add_product_modal.confirm()
 
         then: 'he should be redirected to the cart page and see two items on it'
-        at(CartPage).items() == 2
+        at(CartPage).hasItems(2)
 
         and: 'the both items must have one unit'
-        at(CartPage).item_quantity(0) == 1
-        at(CartPage).item_quantity(1) == 1
+        at(CartPage).hasQuantity(0, 1)
+        at(CartPage).hasQuantity(1, 1)
     }
 
     def 'Customer should be able to checkout his cart'() {

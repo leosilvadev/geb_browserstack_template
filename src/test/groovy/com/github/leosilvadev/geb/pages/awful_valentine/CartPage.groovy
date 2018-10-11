@@ -19,28 +19,28 @@ class CartPage extends Page {
 
         empty_card_container(required: false){ $('#emptyCartMsg') }
 
-        item_containers { $('#viewCartTable > tbody > tr').not('.subtotal, .shipping, .tax-row, .total') }
+        item_containers(required: false) { $('#viewCartTable > tbody > tr').not('.subtotal, .shipping, .tax-row, .total') }
 
         continue_shopping_button(to: HomePage) { $('#continueShopping') }
         checkout_button(to: CheckoutPage) { $('#Cart66CheckoutButton') }
     }
 
     boolean has_no_items() {
-        empty_card_container.displayed
+        waitFor {empty_card_container.displayed}
     }
 
-    int items(number) {
-        item_containers.size()
+    boolean hasItems(number) {
+        waitFor { item_containers.size() == number }
     }
 
-    int item_quantity(item_index) {
+    boolean hasQuantity(itemIndex, quantity) {
         def item_quantity_inputs = item_containers*.find('.itemQuantity')
 
-        if (item_index >= item_quantity_inputs.size()) {
+        if (itemIndex >= item_quantity_inputs.size()) {
             throw new IllegalArgumentException("Invalid Item. There are only ${item_quantity_inputs.size()} items but you are requesting the item at index $item_index")
         }
 
-        item_quantity_inputs[item_index].value().toInteger()
+        waitFor { item_quantity_inputs[itemIndex].value().toInteger() == quantity }
     }
 
     Navigator continue_shopping() {
