@@ -25,7 +25,7 @@ class CartPage extends Page {
         checkoutButton(to: CheckoutPage) { $('#Cart66CheckoutButton') }
     }
 
-    boolean has_no_items() {
+    boolean hasNoItems() {
         waitFor { emptyCardContainer.displayed }
     }
 
@@ -43,7 +43,7 @@ class CartPage extends Page {
         waitFor { item_quantity_inputs[itemIndex].value().toInteger() == quantity }
     }
 
-    Navigator continue_shopping() {
+    Navigator continueShopping() {
         continueShoppingButton.click()
     }
 

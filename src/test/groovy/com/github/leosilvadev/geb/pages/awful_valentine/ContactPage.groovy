@@ -10,50 +10,50 @@ class ContactPage extends Page {
     static url = 'http://awful-valentine.com/contact-us/'
 
     static at = {
-        header_menu.get_current_page_button().text() == 'Contact Us'
+        headerMenu.getCurrentPageButton().text() == 'Contact Us'
     }
 
     static content = {
-        header_menu { module HeaderMenu }
+        headerMenu { module HeaderMenu }
 
-        name_input { $('input[name=your-name]') }
-        name_alert { $('span.your-name > span[role=alert]') }
+        nameInput { $('input[name=your-name]') }
+        nameAlert { $('span.your-name > span[role=alert]') }
 
-        email_input { $('input[name=your-email]') }
-        email_alert { $('span.your-email > span[role=alert]') }
+        emailInput { $('input[name=your-email]') }
+        emailAlert { $('span.your-email > span[role=alert]') }
 
-        subject_input { $('input[name=your-subject]') }
-        message_input { $('textarea[name=your-message]') }
-        submit_button { $('input[type=submit]') }
+        subjectInput { $('input[name=your-subject]') }
+        messageInput { $('textarea[name=your-message]') }
+        submitButton { $('input[type=submit]') }
 
-        alert_container { $('div[role=alert]') }
+        alertContainer { $('div[role=alert]') }
     }
 
     Navigator setName(String name) {
         NonEmptyNavigator
-        name_input.value(name)
+        nameInput.value(name)
     }
 
     Navigator setEmail(String email) {
-        email_input.value(email)
+        emailInput.value(email)
     }
 
     Navigator setSubject(String subject) {
-        subject_input.value(subject)
+        subjectInput.value(subject)
     }
 
     Navigator setMessage(String message) {
-        message_input.value(message)
+        messageInput.value(message)
     }
 
     Navigator submit() {
-        submit_button.click()
+        submitButton.click()
     }
 
     boolean hasAlertFor(String element) {
         switch (element) {
-            case 'name': return waitFor { name_alert.displayed }
-            case 'email': return waitFor { email_alert.displayed }
+            case 'name': return waitFor { nameAlert.displayed }
+            case 'email': return waitFor { emailAlert.displayed }
             default: return false
         }
     }

@@ -11,10 +11,10 @@ class EmptyCartSpec extends FeatureSpec {
         to(HomePage)
 
         and: 'he clicks on "Cart" link'
-        at(HomePage).header_menu.go_to_cart()
+        at(HomePage).headerMenu.goToCart()
 
         then: 'he should be redirected to the cart page and see no item on it'
-        at(CartPage).has_no_items()
+        at(CartPage).hasNoItems()
     }
 
 }

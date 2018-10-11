@@ -14,13 +14,13 @@ class CartSpec extends FeatureSpec {
         to(HomePage)
 
         and: 'adds one item in the cart'
-        at(HomePage).special_items_menu.add_to_cart(0)
+        at(HomePage).specialItemsMenu.add_to_cart(0)
 
         then: 'a confirmation modal should be shown'
-        at(HomePage).add_product_modal.displayed
+        at(HomePage).addProductModal.displayed
 
         when: 'the customer confirms that he wants this product'
-        at(HomePage).add_product_modal.confirm()
+        at(HomePage).addProductModal.confirm()
 
         then: 'he should be redirected to the cart page and see one item on it'
         at(CartPage).hasItems(1)
@@ -31,19 +31,19 @@ class CartSpec extends FeatureSpec {
 
     def 'Customer should be able to search and add more products after having a cart with product'() {
         when: 'the customer clicks in the "continue shopping" button'
-        at(CartPage).continue_shopping()
+        at(CartPage).continueShopping()
 
         then: 'the customer must be redirected to the home page'
         at(HomePage)
 
         when: 'customer adds a new product into the cart'
-        at(HomePage).special_items_menu.add_to_cart(1)
+        at(HomePage).specialItemsMenu.add_to_cart(1)
 
         then: 'a confirmation modal should be shown'
-        at(HomePage).add_product_modal.displayed
+        at(HomePage).addProductModal.displayed
 
         when: 'the customer confirms that he wants this product'
-        at(HomePage).add_product_modal.confirm()
+        at(HomePage).addProductModal.confirm()
 
         then: 'he should be redirected to the cart page and see two items on it'
         at(CartPage).hasItems(2)

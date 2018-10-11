@@ -10,26 +10,26 @@ import org.openqa.selenium.interactions.Actions
 class HeaderMenu extends Module {
 
     static content = {
-        active_button { $('#secondary-menu .current_page_item > a') }
+        activeButton { $('#secondary-menu .current_page_item > a') }
 
-        home_button(to: HomePage) { $('#secondary-menu a') }
-        code_button { $('#secondary-menu > li.page-item-38 > a') }
-        contact_button(to: ContactPage) { $('#secondary-menu > li.page-item-59 > a') }
-        purchase_button { $('#secondary-menu > li.page-item-68 > a') }
-        store_button { $('#secondary-menu > li.page-item-5 > a') }
+        homeButton(to: HomePage) { $('#secondary-menu a') }
+        codeButton { $('#secondary-menu > li.page-item-38 > a') }
+        contactButton(to: ContactPage) { $('#secondary-menu > li.page-item-59 > a') }
+        purchaseButton { $('#secondary-menu > li.page-item-68 > a') }
+        storeButton { $('#secondary-menu > li.page-item-5 > a') }
 
-        cart_button(to: CartPage) { $('#secondary-menu li.page-item-6 > a') }
+        cartButton(to: CartPage) { $('#secondary-menu li.page-item-6 > a') }
     }
 
-    Navigator get_current_page_button() {
-        active_button
+    Navigator getCurrentPageButton() {
+        activeButton
     }
 
-    Navigator go_to_cart() {
+    Navigator goToCart() {
         interact {
-            moveToElement store_button
-            cart_button.displayed
-            click cart_button   
+            moveToElement storeButton
+            cartButton.displayed
+            click cartButton
         }
     }
 

@@ -10,19 +10,19 @@ class HomePage extends Page {
     static url = 'http://awful-valentine.com/'
 
     static at = {
-        header_menu.get_current_page_button().text() == 'Home'
+        headerMenu.getCurrentPageButton().text() == 'Home'
     }
 
     static content = {
-        top_color_stripes { $('#color-stripes') }
+        topColorStripes { $('#color-stripes') }
 
-        header_menu { module HeaderMenu }
-        special_items_menu { module SpecialItemsMenu }
-        add_product_modal { module AddProductModal }
+        headerMenu { module HeaderMenu }
+        specialItemsMenu { module SpecialItemsMenu }
+        addProductModal { module AddProductModal }
 
-        offers_container { $('#top-area .container') }
-        main_container { $('#main-content-area.container') }
-        footer_container { $('#footer-bottom .container') }
+        offersContainer { $('#top-area .container') }
+        mainContainer { $('#main-content-area.container') }
+        footerContainer { $('#footer-bottom .container') }
     }
 
 }
