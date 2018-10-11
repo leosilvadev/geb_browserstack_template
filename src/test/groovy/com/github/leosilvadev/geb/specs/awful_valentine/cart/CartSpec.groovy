@@ -14,7 +14,7 @@ class CartSpec extends FeatureSpec {
         to(HomePage)
 
         and: 'adds one item in the cart'
-        at(HomePage).specialItemsMenu.add_to_cart(0)
+        at(HomePage).specialItemsMenu.addToCart(0)
 
         then: 'a confirmation modal should be shown'
         at(HomePage).addProductModal.displayed
@@ -37,7 +37,7 @@ class CartSpec extends FeatureSpec {
         at(HomePage)
 
         when: 'customer adds a new product into the cart'
-        at(HomePage).specialItemsMenu.add_to_cart(1)
+        at(HomePage).specialItemsMenu.addToCart(1)
 
         then: 'a confirmation modal should be shown'
         at(HomePage).addProductModal.displayed

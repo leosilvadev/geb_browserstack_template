@@ -34,13 +34,13 @@ class CartPage extends Page {
     }
 
     boolean hasQuantity(itemIndex, quantity) {
-        def item_quantity_inputs = itemContainers*.find('.itemQuantity')
+        def itemQuantityInputs = itemContainers*.find('.itemQuantity')
 
-        if (itemIndex >= item_quantity_inputs.size()) {
-            throw new IllegalArgumentException("Invalid Item. There are only ${item_quantity_inputs.size()} items but you are requesting the item at index $item_index")
+        if (itemIndex >= itemQuantityInputs.size()) {
+            throw new IllegalArgumentException("Invalid Item. There are only ${itemQuantityInputs.size()} items but you are requesting the item at index $item_index")
         }
 
-        waitFor { item_quantity_inputs[itemIndex].value().toInteger() == quantity }
+        waitFor { itemQuantityInputs[itemIndex].value().toInteger() == quantity }
     }
 
     Navigator continueShopping() {

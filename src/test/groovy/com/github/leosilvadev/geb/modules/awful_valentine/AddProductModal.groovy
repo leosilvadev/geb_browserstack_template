@@ -9,7 +9,7 @@ class AddProductModal extends Module {
     static content = {
         container { $('#fancybox-content') }
 
-        confirm_add_button(to: CartPage) { $('#fancybox-content input[type=submit]') }
+        confirmAddButton(to: CartPage) { $('#fancybox-content input[type=submit]') }
     }
 
     boolean isDisplayed() {
@@ -18,7 +18,7 @@ class AddProductModal extends Module {
 
     Navigator confirm() {
         interact {
-            click confirm_add_button
+            click confirmAddButton
         }
     }
 

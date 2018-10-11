@@ -9,8 +9,8 @@ class SpecialItemsMenu extends Module {
         itemContainers { $('#special-items > .special-item') }
     }
 
-    Navigator add_to_cart(item_index) {
-        def button = itemContainers[item_index].find('a.add-to-cart')
+    Navigator addToCart(itemIndex) {
+        def button = itemContainers[itemIndex].find('a.add-to-cart')
         button.click()
     }
 
