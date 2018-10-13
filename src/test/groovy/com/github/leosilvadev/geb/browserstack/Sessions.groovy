@@ -40,7 +40,7 @@ class Sessions {
   }
 
   static void failCurrentSession(final String sessionName, final Throwable ex) {
-    def id = currentSession().automation_session.hashed_id
+    def id = currentSession(sessionName).automation_session.hashed_id
     Unirest.put(format(URL_ONE_SESSION, id))
       .header('Content-Type', 'application/json')
       .basicAuth(config.username(), config.accessKey())
