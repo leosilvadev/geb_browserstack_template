@@ -11,7 +11,10 @@ class SpecialItemsMenu extends Module {
 
     Navigator addToCart(itemIndex) {
         def button = itemContainers[itemIndex].find('a.add-to-cart')
-        button.click()
+        interact {
+            moveToElement button
+            click button
+        }
     }
 
 }

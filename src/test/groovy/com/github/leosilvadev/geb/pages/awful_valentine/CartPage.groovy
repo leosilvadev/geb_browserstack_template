@@ -26,11 +26,11 @@ class CartPage extends Page {
     }
 
     boolean hasNoItems() {
-        waitFor { emptyCardContainer.displayed }
+        emptyCardContainer.displayed
     }
 
     boolean hasItems(number) {
-        waitFor { itemContainers.size() == number }
+        itemContainers.size() == number
     }
 
     boolean hasQuantity(itemIndex, quantity) {
@@ -44,11 +44,17 @@ class CartPage extends Page {
     }
 
     Navigator continueShopping() {
-        continueShoppingButton.click()
+        interact {
+            moveToElement continueShoppingButton
+            click continueShoppingButton
+        }
     }
 
     Navigator checkout() {
-        checkoutButton.click()
+        interact {
+            moveToElement checkoutButton
+            click checkoutButton
+        }
     }
 
 }

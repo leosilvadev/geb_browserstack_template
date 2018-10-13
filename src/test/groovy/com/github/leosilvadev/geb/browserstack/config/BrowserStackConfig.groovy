@@ -4,10 +4,23 @@ import java.util.concurrent.atomic.AtomicReference
 
 class BrowserStackConfig {
 
+  private static ThreadLocal threadLocal = new ThreadLocal<>()
+
   private static AtomicReference<SessionMode> modeRef
 
   static {
     modeRef = new AtomicReference<>(SessionMode.SESSION_PER_METHOD)
+  }
+
+  static String initSession() {
+    final String uuid = UUID.randomUUID().toString().replaceAll('-', '')
+    println("Initializing session with uuid $uuid, previous value was ${threadLocal.get()}")
+    threadLocal.set(uuid)
+    uuid
+  }
+
+  static String sessionUuid() {
+    threadLocal.get()
   }
 
   static void setMode(final SessionMode mode) {
@@ -36,10 +49,6 @@ class BrowserStackConfig {
 
   static String project() {
     System.getenv('GEB_BROWSERSTACK_PROJECT') ?: 'Project Geb test'
-  }
-
-  static String initialSessionName() {
-    new Date().format("dd/MM/yyyy HH:mm:ss")
   }
 
   static boolean isModeSessionPerSpec() {

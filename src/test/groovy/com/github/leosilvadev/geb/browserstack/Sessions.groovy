@@ -1,6 +1,7 @@
 package com.github.leosilvadev.geb.browserstack
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.leosilvadev.geb.browserstack.config.BrowserStackConfig
 import com.mashape.unirest.http.Unirest
 import com.github.leosilvadev.geb.browserstack.config.BrowserStackConfig as config
 
@@ -12,7 +13,7 @@ class Sessions {
   private static final String URL_ONE_SESSION = config.urlFor('/sessions/%s.json')
   private static final ObjectMapper mapper = new ObjectMapper()
 
-  static Map currentSession(final String sessionName = false) {
+  static Map currentSession() {
     def build = Builds.currentBuild()
 
     def json = Unirest.get(format(URL_GET_SESSIONS, build.automation_build.hashed_id))
@@ -21,31 +22,34 @@ class Sessions {
       .body
 
     def sessions = mapper.readValue(json, List)
+    def uuid = BrowserStackConfig.sessionUuid()
 
-    if (!sessionName) {
-      return sessions ? sessions.head() : [:]
-    }
+    println("Getting current session by uuid $uuid-")
 
-    sessions.find { it.automation_session.name == sessionName } ?: [:]
+    sessions.find { it.automation_session.name == uuid } ?: [:]
   }
 
   static void setSessionName(final String name) {
-    def id = currentSession().automation_session.hashed_id
-    Unirest.put(format(URL_ONE_SESSION, id))
-      .header('Content-Type', 'application/json')
-      .basicAuth(config.username(), config.accessKey())
-      .body(mapper.writeValueAsString([name: name]))
-      .asString()
-      .body
+    def id = currentSession().automation_session?.hashed_id
+    if (id) {
+      Unirest.put(format(URL_ONE_SESSION, id))
+        .header('Content-Type', 'application/json')
+        .basicAuth(config.username(), config.accessKey())
+        .body(mapper.writeValueAsString([name: name]))
+        .asString()
+        .body
+    }
   }
 
-  static void failCurrentSession(final String sessionName, final Throwable ex) {
-    def id = currentSession(sessionName).automation_session.hashed_id
-    Unirest.put(format(URL_ONE_SESSION, id))
-      .header('Content-Type', 'application/json')
-      .basicAuth(config.username(), config.accessKey())
-      .body(mapper.writeValueAsString([status: 'failed', reason: ex.message]))
-      .asString()
-      .body
+  static void failCurrentSession(final Throwable ex) {
+    def id = currentSession().automation_session?.hashed_id
+    if (id) {
+      Unirest.put(format(URL_ONE_SESSION, id))
+        .header('Content-Type', 'application/json')
+        .basicAuth(config.username(), config.accessKey())
+        .body(mapper.writeValueAsString([status: 'failed', reason: ex.message]))
+        .asString()
+        .body
+    }
   }
 }
