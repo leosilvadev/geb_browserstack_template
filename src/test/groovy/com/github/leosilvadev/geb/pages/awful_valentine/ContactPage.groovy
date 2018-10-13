@@ -47,7 +47,7 @@ class ContactPage extends Page {
     }
 
     Navigator submit() {
-        submitButton.click()
+        waitFor { submitButton.click() }
     }
 
     boolean hasAlertFor(String element) {
