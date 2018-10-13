@@ -4,6 +4,9 @@ import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
 
+baseNavigatorWaiting = true
+atCheckWaiting = true
+
 waiting {
   timeout = 10
 }
@@ -45,11 +48,12 @@ if (config.browser()) {
    * SESSION_PER_METHOD mode adds some overhead in execution time, since it
    * clear the cache and close the browser after each method.
    **/
+
   config.setMode(config.SessionMode.SESSION_PER_METHOD)
   driver = {
     def capabilities = [
       build  : config.buildName(),
-      name   : config.initialSessionName(),
+      name   : config.initSession(),
       project: config.project()
     ]
     new BrowserStackDriverFactory().create(
