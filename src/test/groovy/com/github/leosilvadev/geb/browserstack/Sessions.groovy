@@ -12,7 +12,7 @@ class Sessions {
   private static final String URL_ONE_SESSION = config.urlFor('/sessions/%s.json')
   private static final ObjectMapper mapper = new ObjectMapper()
 
-  static Map currentSession() {
+  static Map currentSession(final String sessionName = false) {
     def build = Builds.currentBuild()
 
     def json = Unirest.get(format(URL_GET_SESSIONS, build.automation_build.hashed_id))
@@ -21,7 +21,12 @@ class Sessions {
       .body
 
     def sessions = mapper.readValue(json, List)
-    sessions ? sessions.head() : [:]
+
+    if (!sessionName) {
+      return sessions ? sessions.head() : [:]
+    }
+
+    sessions.find { it.automation_session.name == sessionName } ?: [:]
   }
 
   static void setSessionName(final String name) {
@@ -34,7 +39,7 @@ class Sessions {
       .body
   }
 
-  static void failCurrentSession(Throwable ex) {
+  static void failCurrentSession(final String sessionName, final Throwable ex) {
     def id = currentSession().automation_session.hashed_id
     Unirest.put(format(URL_ONE_SESSION, id))
       .header('Content-Type', 'application/json')

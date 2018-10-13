@@ -7,6 +7,8 @@ class BrowserStackFailureListener extends AbstractRunListener {
 
     @Override
     void error(ErrorInfo error) {
-        Sessions.failCurrentSession(error.exception)
+        def specName = error.method.feature.spec.name
+        def featureName = error.method.feature.name
+        Sessions.failCurrentSession("${specName}: ${featureName}", error.exception)
     }
 }
