@@ -19,10 +19,15 @@ class FeatureSpec extends GebSpec {
       Sessions.setSessionName(specName)
 
     } else {
-      def featureName = specificationContext.currentFeature.name
-      Sessions.setSessionName("${specName}: ${featureName}")
+      Sessions.setSessionName(sessionName())
       CachingDriverFactory.clearCacheAndQuitDriver()
     }
+  }
+
+  private String sessionName() {
+    def specName = specificationContext.currentSpec.name
+    def featureName = specificationContext.currentFeature.name
+    "${specName}: ${featureName}"
   }
 
 }
