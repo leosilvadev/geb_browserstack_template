@@ -4,6 +4,8 @@ import com.github.leosilvadev.geb.browserstack.Sessions
 import com.github.leosilvadev.geb.browserstack.config.BrowserStackConfig
 import geb.driver.CachingDriverFactory
 import geb.spock.GebSpec
+import spock.lang.Stepwise
+import spock.lang.Unroll
 
 class FeatureSpec extends GebSpec {
 
@@ -13,20 +15,29 @@ class FeatureSpec extends GebSpec {
     }
   }
 
-  private void updateSessionInBrowserStack() {
-    def specName = specificationContext.currentSpec.name
-    if (BrowserStackConfig.isModeSessionPerSpec()) {
-      Sessions.setSessionName(specName)
-
-    } else {
-      Sessions.setSessionName(sessionName())
+  def cleanupSpec() {
+    def stepwise = getSpecificationContext().currentSpec.getAnnotation(Stepwise)
+    def unroll = getSpecificationContext().currentSpec.getAnnotation(Unroll)
+    if (BrowserStackConfig.isModeSessionPerSpec() || stepwise || unroll) {
+      Sessions.setSessionName(getSpecificationContext().currentSpec.name)
       CachingDriverFactory.clearCacheAndQuitDriver()
     }
   }
 
+  private void updateSessionInBrowserStack() {
+    def stepwise = getSpecificationContext().currentSpec.getAnnotation(Stepwise)
+    def unroll = getSpecificationContext().currentSpec.getAnnotation(Unroll)
+    if (BrowserStackConfig.isModeSessionPerSpec() || stepwise || unroll) {
+      return
+    }
+
+    Sessions.setSessionName(sessionName())
+    CachingDriverFactory.clearCacheAndQuitDriver()
+  }
+
   private String sessionName() {
-    def specName = specificationContext.currentSpec.name
-    def featureName = specificationContext.currentFeature.name
+    def specName = getSpecificationContext().currentSpec.name
+    def featureName = getSpecificationContext().currentFeature.name
     "${specName}: ${featureName}"
   }
 

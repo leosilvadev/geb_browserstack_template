@@ -21,7 +21,7 @@ class CartPage extends Page {
 
         itemContainers(required: false) { $('#viewCartTable > tbody > tr').not('.subtotal, .shipping, .tax-row, .total') }
 
-        continueShoppingButton(to: HomePage) { $('#continueShopping') }
+        continueShoppingButton(to: HomePage) { $('.Cart66CartContinueShopping') }
         checkoutButton(to: CheckoutPage) { $('#Cart66CheckoutButton') }
     }
 
@@ -44,16 +44,14 @@ class CartPage extends Page {
     }
 
     Navigator continueShopping() {
-        interact {
-            moveToElement continueShoppingButton
-            click continueShoppingButton
+        waitFor {
+            continueShoppingButton.click()
         }
     }
 
     Navigator checkout() {
-        interact {
-            moveToElement checkoutButton
-            click checkoutButton
+        waitFor {
+            checkoutButton.click()
         }
     }
 

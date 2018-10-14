@@ -4,9 +4,9 @@ import com.github.leosilvadev.geb.pages.awful_valentine.ContactPage
 import com.github.leosilvadev.geb.specs.FeatureSpec
 import spock.lang.Unroll
 
+@Unroll
 class ContactSendValidationSpec extends FeatureSpec {
 
-    @Unroll
     def '''
         Customer must not be able to send contact passing name as #name, email as #email and message as #message.
         An error must be shown in element #element'''(name, email, subject, message, element) {

@@ -7,13 +7,13 @@ class SpecialItemsMenu extends Module {
 
     static content = {
         itemContainers { $('#special-items > .special-item') }
+
+        addToCartButtons { $('#special-items > .special-item .add-to-cart') }
     }
 
     Navigator addToCart(itemIndex) {
-        def button = itemContainers[itemIndex].find('a.add-to-cart')
-        interact {
-            moveToElement button
-            click button
+        waitFor {
+            addToCartButtons[itemIndex].click()
         }
     }
 

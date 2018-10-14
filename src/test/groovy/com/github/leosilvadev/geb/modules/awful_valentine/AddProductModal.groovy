@@ -13,7 +13,7 @@ class AddProductModal extends Module {
     }
 
     boolean isDisplayed() {
-        waitFor { container.displayed }
+        container.displayed
     }
 
     Navigator confirm() {
