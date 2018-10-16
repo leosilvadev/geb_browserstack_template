@@ -20,8 +20,8 @@ class FeatureSpec extends GebSpec {
     def unroll = getSpecificationContext().currentSpec.getAnnotation(Unroll)
     if (BrowserStackConfig.isModeSessionPerSpec() || stepwise || unroll) {
       Sessions.setSessionName(getSpecificationContext().currentSpec.name)
-      CachingDriverFactory.clearCacheAndQuitDriver()
     }
+    CachingDriverFactory.clearCacheAndQuitDriver()
   }
 
   private void updateSessionInBrowserStack() {
