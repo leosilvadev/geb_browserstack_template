@@ -8,7 +8,3 @@ COPY    settings.gradle app
 WORKDIR app
 
 RUN gradle clean assemble
-
-ARG task
-
-ENTRYPOINT gradle $task
