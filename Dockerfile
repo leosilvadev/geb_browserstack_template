@@ -1,12 +1,14 @@
-FROM openjdk:8u171-jdk-alpine3.8
+FROM gradle:4.10.2-jdk8-alpine
 
-RUN mkdir app
-COPY . app
+RUN     mkdir           app
+COPY    src             app
+COPY    build.gradle    app
+COPY    settings.gradle app
 
 WORKDIR app
 
-RUN ls app
+RUN gradle clean assemble
 
-RUN ./gradlew clean assemble
+ARG task
 
-ENTRYPOINT ./gradlew check
+ENTRYPOINT gradle $task
